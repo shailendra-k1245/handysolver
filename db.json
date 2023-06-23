@@ -44,7 +44,8 @@
             "Labels": {
                 "data": "",
                 "marked": true
-            }
+            },
+            "Active":true
         }
     ]
 }
