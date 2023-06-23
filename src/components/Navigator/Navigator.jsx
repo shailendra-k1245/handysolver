@@ -1,5 +1,5 @@
 export const Navigator = () => {
     return <div>
-        <p>New Job +</p>
+        <p className="cursor-pointer">New Job +</p>
     </div>
 }
