@@ -2,50 +2,53 @@
     "jobs": [
         {
             "JobTitle": {
-                "data": "",
-                "marked": true
+              "data": "",
+              "marked": true
             },
             "Introduction": {
-                "data": "",
-                "marked": true
+              "data": "",
+              "marked": true
             },
             "Roles": {
-                "data": "",
-                "marked": true
+              "data": "",
+              "marked": true
             },
             "Experience": {
-                "data": "",
-                "marked": true
+              "data": {
+                "min": 0,
+                "max": 0
+              },
+              "marked": true
             },
             "Qualifications": {
-                "data": "",
-                "marked": true
+              "data": "",
+              "marked": true
             },
             "SalaryRange": {
-                "data": "",
-                "marked": false
+              "data": "",
+              "marked": false
             },
             "CallToAction": {
-                "data": "",
-                "marked": true
+              "data": "",
+              "marked": true
             },
             "Company": {
-                "data": "",
-                "marked": false
+              "data": "",
+              "marked": false
             },
             "JobLocation": {
-                "data": "",
-                "marked": true
+              "data": "",
+              "marked": true
             },
             "JobType": {
-                "data": "",
-                "marked": true
+              "data": "Full Time",
+              "marked": true
             },
             "Labels": {
-                "data": "",
-                "marked": true
+              "data": [],
+              "marked": true
             },
-            "Active":true
-        }
+            "Active": true
+          }
     ]
 }

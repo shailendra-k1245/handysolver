@@ -26,7 +26,10 @@ export const JobInput = () => {
       marked: true
     },
     Experience: {
-      data: "",
+      data: {
+        min: 0,
+        max: 0
+      },
       marked: true
     },
     Qualifications: {
@@ -50,20 +53,23 @@ export const JobInput = () => {
       marked: true
     },
     JobType: {
-      data: "",
+      data: "Full Time",
       marked: true
     },
     Labels: {
-      data: "",
+      data: [],
       marked: true
     },
     Active: true
   })
-  const [minExp, setMinExp] = useState(0);
-  const [maxExp, setMaxExp] = useState(0);
 
-  const onSelect = () => { }
-  const onRemove = () => { }
+  const onSelect = (list) => { 
+    setInpData({...inpData,Labels:list})
+  }
+  const onRemove = (list) => { 
+    setInpData({...inpData,Labels:list})
+    
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,7 +91,16 @@ export const JobInput = () => {
   }
 
   const handleSelect = (e) => {
-    console.log(e.target.value);
+    const { name, value } = e.target;
+    if (name === "min" || name === "max") {
+      const updatedData = { ...inpData }
+      updatedData.Experience.data[name] = value
+      setInpData(updatedData);
+      console.log(inpData.Experience.data)
+      console.log(name, value)
+    }else {
+      setInpData({...inpData,JobType:value});
+    }
   }
 
   console.log("inpdata", inpData);
@@ -128,6 +143,7 @@ export const JobInput = () => {
           id="demo-simple-select"
           value={''}
           label="Age"
+          name="min"
           onChange={handleSelect}
         >
           <MenuItem value={1}>One</MenuItem>
@@ -142,7 +158,8 @@ export const JobInput = () => {
           id="demo-simple-select"
           value={''}
           label="Age"
-        // onChange={''}
+          name="max"
+          onChange={handleSelect}
         >
           <MenuItem value={4}>Four</MenuItem>
           <MenuItem value={5}>Five</MenuItem>
@@ -187,7 +204,8 @@ export const JobInput = () => {
           id="demo-simple-select"
           value={''}
           label="Full Time"
-          onChange={''}
+          name = "JobType"
+        onChange={handleSelect}
         >
           <MenuItem value={"Part Time"}>Part Time</MenuItem>
           <MenuItem value={"Contract"}>Contract</MenuItem>
