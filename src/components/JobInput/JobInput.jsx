@@ -8,6 +8,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Multiselect from 'multiselect-react-dropdown';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addJobs } from '../../Redux/action';
 
 export const JobInput = () => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -62,13 +65,16 @@ export const JobInput = () => {
     },
     Active: true
   })
+  const dispatch = useDispatch();
+  const jobs = useSelector((store) => store.jobs);
+  console.log("jobs0red ", jobs)
 
-  const onSelect = (list) => { 
-    setInpData({...inpData,Labels:list})
+  const onSelect = (list) => {
+    setInpData({ ...inpData, Labels: list })
   }
-  const onRemove = (list) => { 
-    setInpData({...inpData,Labels:list})
-    
+  const onRemove = (list) => {
+    setInpData({ ...inpData, Labels: list })
+
   }
 
   const handleChange = (e) => {
@@ -77,7 +83,6 @@ export const JobInput = () => {
     updatedData[name] = { ...updatedData[name], data: value };
     setInpData(updatedData);
   }
-  console.table("inpData", inpData);
 
   const handleCheckBox = (e) => {
     const { id, checked } = e.target;
@@ -98,16 +103,20 @@ export const JobInput = () => {
       setInpData(updatedData);
       console.log(inpData.Experience.data)
       console.log(name, value)
-    }else {
-      setInpData({...inpData,JobType:value});
+    } else {
+      setInpData({ ...inpData, JobType: value });
     }
   }
 
-  console.log("inpdata", inpData);
+  useEffect(() => {
+    dispatch(addJobs(inpData))
+  }, [inpData])
+
+  // console.log("inpdata", inpData);
 
   return <div className="flex flex-col gap-2">
     <div className='flex flex-row gap-2 items-center'>
-      <Checkbox {...label} id="JobTitle" onChange={handleCheckBox} />
+      <Checkbox {...label} id="JobTitle" onChange={handleCheckBox} defaultChecked />
       <TextField id="outlined-basic" name="JobTitle" label="Job Post Title" variant="outlined" onChange={handleChange} />
       <p>Active ?</p>
       <Switch defaultChecked inputProps={{ 'aria-label': 'controlled' }}
@@ -115,7 +124,7 @@ export const JobInput = () => {
     </div>
     <div className='flex flex-row gap-2'>
       <div>
-        <Checkbox {...label} id="Introduction" onChange={handleCheckBox} />
+        <Checkbox {...label} id="Introduction" onChange={handleCheckBox} defaultChecked />
       </div>
       <div>
         <p className="underline my-1">Introduction</p>
@@ -125,7 +134,7 @@ export const JobInput = () => {
     </div>
     <div className='flex flex-row gap-2'>
       <div>
-        <Checkbox {...label} id="Roles" onChange={handleCheckBox} />
+        <Checkbox {...label} id="Roles" onChange={handleCheckBox} defaultChecked />
       </div>
       <div>
         <p className="underline my-1">Roles and Resposibilities</p>
@@ -134,7 +143,7 @@ export const JobInput = () => {
       </div>
     </div>
     <div className='flex flex-row gap-2 items-center'>
-      <Checkbox {...label} id="Experience" onChange={handleCheckBox} />
+      <Checkbox {...label} id="Experience" onChange={handleCheckBox} defaultChecked />
       <p>Experience Range</p>
       <FormControl sx={{ m: 1, minWidth: 80 }}>
         <InputLabel id="demo-simple-select-label">Min</InputLabel>
@@ -168,7 +177,7 @@ export const JobInput = () => {
       </FormControl>
     </div>
     <div className="flex flex-row gap-2">
-      <Checkbox id="Qualifications" {...label} onChange={handleCheckBox} />
+      <Checkbox id="Qualifications" {...label} onChange={handleCheckBox} defaultChecked />
       <TextField id="outlined-basic" label="Qualifications" name="Qualifications" variant="outlined" onChange={handleChange} />
     </div>
     <div className="flex flex-row gap-2">
@@ -177,7 +186,7 @@ export const JobInput = () => {
         name="SalaryRange" onChange={handleChange} />
     </div>
     <div className="flex flex-row gap-2">
-      <Checkbox id="CallToAction" {...label} onChange={handleCheckBox} />
+      <Checkbox id="CallToAction" {...label} onChange={handleCheckBox} defaultChecked />
       <TextField id="outlined-basic" label="Call to Action Concluding Statement.
     Ex. You will be involved with creating various exciting features such as
     chat,real time collaboration, interaction with IOT devices etc. to name a
@@ -186,17 +195,17 @@ export const JobInput = () => {
         onChange={handleChange} />
     </div>
     <div className="flex flex-row gap-2">
-      <Checkbox id="Company" {...label} onChange={handleCheckBox} />
+      <Checkbox id="Company" {...label} onChange={handleCheckBox} defaultChecked/>
       <TextField id="outlined-basic" label="Company" variant="outlined" name="Company" onChange={handleChange} />
     </div>
     <div className="flex flex-row gap-2">
-      <Checkbox id="JobLocation" {...label} onChange={handleCheckBox} />
+      <Checkbox id="JobLocation" {...label} onChange={handleCheckBox} defaultChecked/>
       <TextField id="outlined-basic" label="Job Location (Map Search)" variant="outlined"
         name="JobLocation"
         onChange={handleChange} />
     </div>
     <div className="flex flex-row gap-2 items-center">
-      <Checkbox id="JobType" {...label} onChange={handleCheckBox} />
+      <Checkbox id="JobType" {...label} onChange={handleCheckBox} defaultChecked/>
       <FormControl sx={{ m: 1, minWidth: 130 }}>
         <InputLabel id="demo-simple-select-label">Full Time</InputLabel>
         <Select
@@ -204,8 +213,8 @@ export const JobInput = () => {
           id="demo-simple-select"
           value={''}
           label="Full Time"
-          name = "JobType"
-        onChange={handleSelect}
+          name="JobType"
+          onChange={handleSelect}
         >
           <MenuItem value={"Part Time"}>Part Time</MenuItem>
           <MenuItem value={"Contract"}>Contract</MenuItem>

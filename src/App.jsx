@@ -3,6 +3,7 @@ import './App.css'
 import { JobInput } from './components/JobInput/JobInput'
 import { Navigator } from './components/Navigator/Navigator'
 import { DeleteDuplicate } from "./components/DeleteDuplicate/DeleteDuplicate";
+import { JobPreview } from './components/JobPreview/JobPreview';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Navigator />
         <JobInput />
         <DeleteDuplicate />
+        <JobPreview/>
       </div>
     </div>
   )
