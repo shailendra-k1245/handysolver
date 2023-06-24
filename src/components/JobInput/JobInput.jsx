@@ -70,11 +70,14 @@ export const JobInput = () => {
   console.log("jobs0red ", jobs)
 
   const onSelect = (list) => {
-    setInpData({ ...inpData, Labels: list })
+    const updatedData = {...inpData};
+    updatedData.Labels.data = list;
+    setInpData(updatedData)
   }
   const onRemove = (list) => {
-    setInpData({ ...inpData, Labels: list })
-
+     const updatedData = {...inpData};
+    updatedData.Labels.data = list;
+    setInpData(updatedData)
   }
 
   const handleChange = (e) => {
@@ -104,7 +107,9 @@ export const JobInput = () => {
       console.log(inpData.Experience.data)
       console.log(name, value)
     } else {
-      setInpData({ ...inpData, JobType: value });
+     const updatedData = {...inpData};
+     updatedData.JobType.data = value;
+     setInpData(updatedData)
     }
   }
 
